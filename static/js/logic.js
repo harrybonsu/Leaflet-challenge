@@ -19,17 +19,13 @@ function createFeatures(earthquakeData) {
     function QuakeColor(color) {
         switch (true) {
             case (color >= 4.0 && color <= 5.0):
-                return "Red";
-            case (color >= 5.0 && color <= 6.0):
                 return "Blue";
+            case (color >= 5.0 && color <= 6.0):
+                return "Purple";
             case (color >= 6.0 && color <= 7.0):
                 return "Yellow";
             case (color >= 7.0 && color <= 8.0):
-                return "Purple";
-            // case (color >= 4.0 && color <= 5.0):
-            //     return "Blue";
-            // case (color >= 5.0 && color <= 6.0):
-            //     return "Purple";
+                return "Red";
             default:
                 return "Pink";
         }
@@ -41,8 +37,8 @@ function createFeatures(earthquakeData) {
             radius: features.properties.mag * 5,
             fillColor: QuakeColor(features.properties.mag),
             color: QuakeColor(features.properties.mag),
-            opacity: 1.0,
-            fillOpacity: .5
+            //opacity: 1.0,
+            fillOpacity: .3
 
         }
         return L.circleMarker(latlng, CircleOptions)
