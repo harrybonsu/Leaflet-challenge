@@ -18,18 +18,18 @@ function createFeatures(earthquakeData) {
     // Function for Circle Color Base on Criteria. The Color Scale is base of the 7 colors of a Rainboy ROY G BIV
     function QuakeColor(color) {
         switch (true) {
-            case (color <= 0 && color <= 1.0):
+            case (color >= 4.0 && color <= 5.0):
                 return "Red";
-            case (color <= 1.0 && color <= 2.0):
-                return "Orange";
-            case (color <= 2.0 && color <= 3.0):
-                return "Yellow";
-            case (color <= 3.0 && color <= 4.0):
-                return "Green";
-            case (color <= 4.0 && color <= 5.0):
+            case (color >= 5.0 && color <= 6.0):
                 return "Blue";
-            case (color <= 5.0 && color <= 6.0):
+            case (color >= 6.0 && color <= 7.0):
+                return "Yellow";
+            case (color >= 7.0 && color <= 8.0):
                 return "Purple";
+            // case (color >= 4.0 && color <= 5.0):
+            //     return "Blue";
+            // case (color >= 5.0 && color <= 6.0):
+            //     return "Purple";
             default:
                 return "Pink";
         }
@@ -38,7 +38,7 @@ function createFeatures(earthquakeData) {
 
     function CircleMaker(features, latlng) {
         var CircleOptions = {
-            radius: features.properties.mag * 8,
+            radius: features.properties.mag * 5,
             fillColor: QuakeColor(features.properties.mag),
             color: QuakeColor(features.properties.mag),
             opacity: 1.0,
@@ -104,7 +104,7 @@ function createMap(earthquakes) {
             37.09, -95.71
         ],
         zoom: 2,
-        layers: [streetmap, earthquakes]
+        layers: [Satellite, earthquakes]
     });
 
     // Create a legend to display information about our map
