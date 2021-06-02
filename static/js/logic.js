@@ -112,8 +112,16 @@ function createMap(earthquakes) {
     // When the layer control is added, insert a div with the class of "legend"
     info.onAdd = function() {
         var div = L.DomUtil.create("div", "legend");
-        return div;
-    };
+        var bins = ["4 -5", "5 -6", "6 - 7", "7 - 8"]
+        var colors = ["blue", "purple", "yellow", "red"];
+        var labels = [];
+        labels.push(`<p style=background-color:lightgrey>Magnitude of Quake</p>`);
+        for (var i = 0; i<bins.length; i++) {
+        labels.push(`<ul style=background-color:${colors[i]}>${bins[i]}</ul>`);
+        };
+        div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+            return div;
+        };
     // Add the info legend to the map
     info.addTo(myMap);
 }
