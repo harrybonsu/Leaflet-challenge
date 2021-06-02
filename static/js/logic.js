@@ -3,7 +3,7 @@ var earthQuakeUrl = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/s
 // Perform a GET request to the query URL
 d3.json(earthQuakeUrl).then(function (data) {
     // Once we get a response, send the data.features object to the createFeatures function
-    console.log(data);
+   // console.log(data);
     createFeatures(data.features);
 });
 
@@ -37,7 +37,6 @@ function createFeatures(earthquakeData) {
             radius: features.properties.mag * 5,
             fillColor: QuakeColor(features.properties.mag),
             color: QuakeColor(features.properties.mag),
-            //opacity: 1.0,
             fillOpacity: .3
 
         }
@@ -103,17 +102,28 @@ function createMap(earthquakes) {
         layers: [Satellite, earthquakes]
     });
 
+        // Create a layer control
+    L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+
     // Create a legend to display information about our map
     var info = L.control({
         position: "bottomright"
     });
+    // When the layer control is added, insert a div with the class of "legend"
+    info.onAdd = function() {
+        var div = L.DomUtil.create("div", "legend");
+        return div;
+    };
     // Add the info legend to the map
     info.addTo(myMap);
-
-    // Create a layer control
-    // Pass in our baseMaps and overlayMaps
-    // Add the layer control to the map
-    L.control.layers(baseMaps, overlayMaps, {
-        collapsed: false
-    }).addTo(myMap);
 }
+
+// Update the legend's innerHTML with the last updated time and station count
+function updateLegend(time, stationCount) {
+    document.querySelector(".legend").innerHTML = [
+      "<p class='low'>4 - 5: " + features.properties.mag + "</p>",
+      "<p class='moderate'>5 - 6: " + features.properties.mag + "</p>",
+      "<p class='high'>6 - 7: " + features.properties.mag + "</p>",
+      "<p class='severe'>7 - 8: " + features.properties.mag + "</p>"
+    ].join("");
+  }
