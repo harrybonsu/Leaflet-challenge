@@ -118,12 +118,3 @@ function createMap(earthquakes) {
     info.addTo(myMap);
 }
 
-// Update the legend's innerHTML with the last updated time and station count
-function updateLegend(time, stationCount) {
-    document.querySelector(".legend").innerHTML = [
-      "<p class='low'>4 - 5: " + features.properties.mag + "</p>",
-      "<p class='moderate'>5 - 6: " + features.properties.mag + "</p>",
-      "<p class='high'>6 - 7: " + features.properties.mag + "</p>",
-      "<p class='severe'>7 - 8: " + features.properties.mag + "</p>"
-    ].join("");
-  }
